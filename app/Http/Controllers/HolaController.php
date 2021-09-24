@@ -3,9 +3,9 @@ namespace App\Http\Controllers;
 
 class HolaController extends Controller
 {
-    public function __invoke(string $name)
+    public function saludo(string $name): string
     {
-    return "Hola {$name}"; 
+    return view("saludo", compact("name"));
     }
 
 

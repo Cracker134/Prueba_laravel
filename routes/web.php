@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HolaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hola/{name}', HolaController::class );
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';

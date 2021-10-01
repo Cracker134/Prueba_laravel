@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
+require __DIR__.'/auth.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::group(["middleware" => ['auth', "verified"]], function(){
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
-require __DIR__.'/auth.php';
+    Route::get("/contact", [ContactController::class, "index"])->name("contact.index");
+    Route::post("/contact", [ContactController::class, "send"])->name("contact.send");
+});

@@ -26,4 +26,8 @@ Route::group(["middleware" => ['auth', "verified"]], function(){
 
     Route::get("/contact", [ContactController::class, "index"])->name("contact.index");
     Route::post("/contact", [ContactController::class, "send"])->name("contact.send");
+
+    Route::get("/mailabel/contact", function() {
+      return new \App\Mail\SendContactform("Motivo","Mensaje");
+    });
 });
